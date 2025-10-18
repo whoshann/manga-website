@@ -158,7 +158,7 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ anime, onNavigate }) => {
         </div>
 
         {/* Episode Sidebar - Desktop Only */}
-        <div className="hidden lg:block lg:w-80 w-full bg-dark-400 lg:border-l border-dark-300 overflow-y-auto" style={{ height: 'calc(100vh - 4rem)' }}>
+        <div className="hidden lg:block lg:w-80 w-full bg-dark-400 lg:border-l border-dark-300 overflow-y-auto" style={{ height: '100vh' }}>
           <div className="p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Episodes</h3>
 

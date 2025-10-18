@@ -46,11 +46,13 @@ cd manga-anime-website
 ### 2. Install Dependencies
 
 Using npm:
+
 ```bash
 npm install
 ```
 
 Or using yarn:
+
 ```bash
 yarn install
 ```
@@ -58,11 +60,13 @@ yarn install
 ### 3. Run Development Server
 
 Using npm:
+
 ```bash
 npm run dev
 ```
 
 Or using yarn:
+
 ```bash
 yarn dev
 ```
@@ -72,11 +76,13 @@ The application will be available at `http://localhost:5173`
 ### 4. Build for Production
 
 Using npm:
+
 ```bash
 npm run build
 ```
 
 Or using yarn:
+
 ```bash
 yarn build
 ```
@@ -84,29 +90,13 @@ yarn build
 ### 5. Preview Production Build
 
 Using npm:
+
 ```bash
 npm run preview
 ```
 
 Or using yarn:
+
 ```bash
 yarn preview
 ```
-
-## 🙏 Acknowledgments
-
-- Sample videos from [Google Test Videos](https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/)
-- Icons from [Lucide React](https://lucide.dev/)
-- UI inspiration from modern streaming platforms
-
-## 📞 Support
-
-If you have any questions or need help, please open an issue in the GitHub repository.
-
----
-
-<div align="center">
-  Made with ❤️ using React, TypeScript, and Tailwind CSS
-  
-  ⭐ Star this repo if you find it helpful!
-</div>

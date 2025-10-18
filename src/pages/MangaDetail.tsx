@@ -1,8 +1,9 @@
 import React from 'react';
-import { Star, Eye, Calendar, User, BookOpen, Play, Heart, Share } from 'lucide-react';
+import { Star, Eye, Calendar, User, BookOpen, Heart, Share } from 'lucide-react';
+import type { Manga } from '../types';
 
 interface MangaDetailProps {
-  item: any;
+  item: Manga;
   onNavigate: (page: string) => void;
 }
 
@@ -12,37 +13,37 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
   const chapters = Array.from({ length: item.chapters || 50 }, (_, i) => ({
     number: i + 1,
     title: `Chapter ${i + 1}`,
-    releaseDate: new Date(Date.now() - (item.chapters - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
+    releaseDate: new Date(Date.now() - ((item.chapters || 50) - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
     views: Math.floor(Math.random() * 100000) + 10000
   })).reverse();
 
-  const handleReadClick = (chapter: any) => {
+  const handleReadClick = () => {
     onNavigate('manga-reader');
   };
 
   return (
     <div className="min-h-screen bg-dark-400">
       {/* Hero Section */}
-      <div className="relative h-96 overflow-hidden">
-        <div 
+      <div className="relative h-auto md:h-96 overflow-hidden pt-20 md:pt-0">
+        <div
           className="absolute inset-0 bg-cover bg-center scale-110 blur-sm"
           style={{ backgroundImage: `url(${item.cover})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark-400 via-dark-400/80 to-dark-400/40" />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-end pb-8">
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-end pb-8 pt-8 md:pt-0">
           <div className="flex flex-col md:flex-row items-start md:items-end space-y-6 md:space-y-0 md:space-x-8 w-full">
             {/* Cover Image */}
             <div className="flex-shrink-0">
               <img
                 src={item.cover}
                 alt={item.title}
-                className="w-48 h-64 object-cover rounded-xl shadow-2xl border-4 border-dark-300"
+                className="w-40 h-56 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl border-4 border-dark-300"
               />
             </div>
-            
+
             {/* Info */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 w-full md:w-auto">
               <div className="flex flex-wrap gap-2 mb-4">
                 {item.genres?.map((genre: string) => (
                   <span key={genre} className="px-3 py-1 bg-primary-500/20 text-primary-300 rounded-full text-sm">
@@ -50,53 +51,52 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                   </span>
                 ))}
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{item.title}</h1>
-              
-              <div className="flex flex-wrap items-center gap-6 text-gray-300 mb-6">
+
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 text-start md:text-left">{item.title}</h1>
+
+              <div className="flex flex-wrap items-start justify-start md:justify-start gap-4 md:gap-6 text-gray-300 mb-6 text-sm md:text-base">
                 <div className="flex items-center space-x-2">
                   <Star className="w-5 h-5 text-yellow-400 fill-current" />
                   <span className="font-semibold">{item.rating}</span>
                   <span className="text-gray-400">/10</span>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <Eye className="w-5 h-5 text-gray-400" />
                   <span>{item.views} views</span>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <BookOpen className="w-5 h-5 text-gray-400" />
                   <span>{item.chapters} chapters</span>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <User className="w-5 h-5 text-gray-400" />
                   <span>{item.author}</span>
                 </div>
-                
-                <span className={`px-3 py-1 rounded-full text-sm ${
-                  item.status === 'Ongoing' ? 'bg-green-500' : 'bg-gray-500'
-                } text-white`}>
+
+                <span className={`px-3 py-1 rounded-full text-sm ${item.status === 'Ongoing' ? 'bg-green-500' : 'bg-gray-500'
+                  } text-white`}>
                   {item.status}
                 </span>
               </div>
-              
-              <div className="flex flex-wrap gap-4">
+
+              <div className="flex flex-wrap gap-3 md:gap-4 justify-start md:justify-start">
                 <button
-                  onClick={() => handleReadClick(chapters[0])}
+                  onClick={handleReadClick}
                   className="bg-primary-500 hover:bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center space-x-2 transform hover:scale-105"
                 >
                   <BookOpen className="w-5 h-5" />
                   <span>Start Reading</span>
                 </button>
-                
-                <button className="bg-dark-300 hover:bg-dark-200 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
+
+                <button className="bg-dark-300 hover:bg-dark-200 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-start space-x-2">
                   <Heart className="w-5 h-5" />
                   <span>Add to Library</span>
                 </button>
-                
-                <button className="bg-dark-300 hover:bg-dark-200 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
+
+                <button className="bg-dark-300 hover:bg-dark-200 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-start space-x-2">
                   <Share className="w-5 h-5" />
                   <span>Share</span>
                 </button>
@@ -134,20 +134,20 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                   </button>
                 </div>
               </div>
-              
+
               <div className="bg-dark-300 rounded-xl overflow-hidden">
                 <div className="max-h-96 overflow-y-auto">
                   {chapters.map((chapter) => (
                     <div
                       key={chapter.number}
-                      onClick={() => handleReadClick(chapter)}
+                      onClick={handleReadClick}
                       className="flex items-center justify-between p-4 hover:bg-dark-200 transition-colors cursor-pointer border-b border-dark-200 last:border-b-0"
                     >
                       <div className="flex items-center space-x-4">
                         <div className="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center flex-shrink-0">
                           <span className="text-white font-semibold text-sm">{chapter.number}</span>
                         </div>
-                        
+
                         <div>
                           <h4 className="font-semibold text-white hover:text-primary-400 transition-colors">
                             {chapter.title}
@@ -157,7 +157,7 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                               <Calendar className="w-4 h-4" />
                               <span>{chapter.releaseDate}</span>
                             </div>
-                            
+
                             <div className="flex items-center space-x-1">
                               <Eye className="w-4 h-4" />
                               <span>{chapter.views.toLocaleString()}</span>
@@ -165,7 +165,7 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                           </div>
                         </div>
                       </div>
-                      
+
                       <BookOpen className="w-5 h-5 text-gray-400 group-hover:text-primary-400 transition-colors" />
                     </div>
                   ))}
@@ -184,12 +184,12 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                   <dt className="text-gray-400 text-sm">Author</dt>
                   <dd className="text-white font-semibold">{item.author}</dd>
                 </div>
-                
+
                 <div>
                   <dt className="text-gray-400 text-sm">Status</dt>
                   <dd className="text-white font-semibold">{item.status}</dd>
                 </div>
-                
+
                 <div>
                   <dt className="text-gray-400 text-sm">Genres</dt>
                   <dd className="flex flex-wrap gap-1 mt-1">
@@ -200,17 +200,17 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                     ))}
                   </dd>
                 </div>
-                
+
                 <div>
                   <dt className="text-gray-400 text-sm">Total Chapters</dt>
                   <dd className="text-white font-semibold">{item.chapters}</dd>
                 </div>
-                
+
                 <div>
                   <dt className="text-gray-400 text-sm">Views</dt>
                   <dd className="text-white font-semibold">{item.views}</dd>
                 </div>
-                
+
                 <div>
                   <dt className="text-gray-400 text-sm">Rating</dt>
                   <dd className="flex items-center space-x-2">
@@ -232,21 +232,21 @@ const MangaDetail: React.FC<MangaDetailProps> = ({ item, onNavigate }) => {
                   <div key={i} className="bg-dark-300 rounded-xl p-4 hover:bg-dark-200 transition-colors cursor-pointer">
                     <div className="flex space-x-3">
                       <img
-                        src={`https://images.pexels.com/photos/${8111000 + i * 100}/pexels-photo-${8111000 + i * 100}.jpeg`}
+                        src={i % 2 === 0 ? "/images/dummy-image2.png" : "/images/dummy-image.jpg"}
                         alt={`Similar manga ${i}`}
                         className="w-16 h-20 object-cover rounded-lg"
                       />
-                      
+
                       <div className="flex-1 min-w-0">
                         <h4 className="font-semibold text-white mb-1 line-clamp-2">
                           Similar Manga Title {i}
                         </h4>
-                        
+
                         <div className="flex items-center space-x-2 text-sm text-gray-400 mb-2">
                           <Star className="w-3 h-3 text-yellow-400 fill-current" />
                           <span>{(8 + Math.random()).toFixed(1)}</span>
                         </div>
-                        
+
                         <div className="flex flex-wrap gap-1">
                           <span className="text-xs bg-dark-200 text-gray-300 px-2 py-1 rounded">Action</span>
                           <span className="text-xs bg-dark-200 text-gray-300 px-2 py-1 rounded">Adventure</span>

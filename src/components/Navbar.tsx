@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div 
+          <div
             className="flex items-center cursor-pointer group"
             onClick={() => onNavigate('home')}
           >
@@ -40,11 +40,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-                  currentPage === item.id
+                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${currentPage === item.id
                     ? 'bg-primary-500/20 text-primary-400'
                     : 'text-gray-300 hover:text-white hover:bg-dark-300'
-                }`}
+                  }`}
               >
                 {item.icon && <item.icon className="w-4 h-4" />}
                 <span>{item.label}</span>
@@ -64,14 +63,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                 className="bg-dark-300 text-white pl-10 pr-4 py-2 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-dark-200 transition-all"
               />
             </div>
-            
+
             <button
               onClick={() => onNavigate('library')}
               className="p-2 text-gray-300 hover:text-primary-400 hover:bg-dark-300 rounded-lg transition-all"
             >
               <Heart className="w-5 h-5" />
             </button>
-            
+
             <button
               onClick={() => onNavigate('login')}
               className="p-2 text-gray-300 hover:text-primary-400 hover:bg-dark-300 rounded-lg transition-all"
@@ -102,17 +101,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                     onNavigate(item.id);
                     setIsMenuOpen(false);
                   }}
-                  className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${
-                    currentPage === item.id
+                  className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-left transition-all ${currentPage === item.id
                       ? 'bg-primary-500/20 text-primary-400'
                       : 'text-gray-300 hover:text-white hover:bg-dark-300'
-                  }`}
+                    }`}
                 >
                   {item.icon && <item.icon className="w-4 h-4" />}
                   <span>{item.label}</span>
                 </button>
               ))}
-              
+
               <div className="px-4 py-2">
                 <div className="relative">
                   <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -123,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   />
                 </div>
               </div>
-              
+
               <div className="flex space-x-2 px-4">
                 <button
                   onClick={() => {
@@ -135,7 +133,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   <Heart className="w-4 h-4" />
                   <span>Library</span>
                 </button>
-                
+
                 <button
                   onClick={() => {
                     onNavigate('login');

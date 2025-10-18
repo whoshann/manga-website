@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Search, Filter, Grid, List, Star, Eye, Calendar, BookOpen } from 'lucide-react';
+import { Search, Grid, List, Star, Eye, Calendar, BookOpen } from 'lucide-react';
+import type { Manga } from '../types';
 
 interface MangaPageProps {
   onNavigate: (page: string) => void;
-  onSelectItem: (item: any) => void;
+  onSelectItem: (item: Manga) => void;
 }
 
 const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
@@ -14,7 +15,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
   const [sortBy, setSortBy] = useState('latest');
 
   const genres = [
-    'Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 
+    'Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror',
     'Romance', 'Sci-Fi', 'Slice of Life', 'Sports', 'Supernatural'
   ];
 
@@ -22,7 +23,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 1,
       title: "Jujutsu Kaisen",
-      cover: "https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg",
+      cover: "/images/jujutsu-kaisen.jpg",
       author: "Gege Akutami",
       genres: ["Action", "Supernatural"],
       status: "Ongoing",
@@ -35,7 +36,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 2,
       title: "Chainsaw Man",
-      cover: "https://images.pexels.com/photos/7034784/pexels-photo-7034784.jpeg",
+      cover: "/images/chainsaw-man.jpg",
       author: "Tatsuki Fujimoto",
       genres: ["Action", "Horror"],
       status: "Ongoing",
@@ -48,7 +49,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 3,
       title: "My Hero Academia",
-      cover: "https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg",
+      cover: "/images/my-hero-academia.jpg",
       author: "Kohei Horikoshi",
       genres: ["Action", "School"],
       status: "Completed",
@@ -61,7 +62,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 4,
       title: "One Piece",
-      cover: "https://images.pexels.com/photos/8111318/pexels-photo-8111318.jpeg",
+      cover: "/images/one-piece.jpg",
       author: "Eiichiro Oda",
       genres: ["Adventure", "Comedy"],
       status: "Ongoing",
@@ -74,7 +75,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 5,
       title: "Attack on Titan",
-      cover: "https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg",
+      cover: "/images/attack-on-titan-final-season-final-episode.jpg",
       author: "Hajime Isayama",
       genres: ["Action", "Drama"],
       status: "Completed",
@@ -87,7 +88,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 6,
       title: "Demon Slayer",
-      cover: "https://images.pexels.com/photos/8111116/pexels-photo-8111116.jpeg",
+      cover: "/images/demon-slayer.jpg",
       author: "Koyoharu Gotouge",
       genres: ["Action", "Historical"],
       status: "Completed",
@@ -101,14 +102,14 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
 
   const filteredManga = mangaList.filter(manga => {
     const matchesSearch = manga.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         manga.author.toLowerCase().includes(searchQuery.toLowerCase());
+      manga.author.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesGenre = selectedGenre === '' || manga.genres.includes(selectedGenre);
     const matchesStatus = selectedStatus === '' || manga.status === selectedStatus;
-    
+
     return matchesSearch && matchesGenre && matchesStatus;
   });
 
-  const handleMangaClick = (manga: any) => {
+  const handleMangaClick = (manga: Manga) => {
     onSelectItem(manga);
     onNavigate('manga-detail');
   };
@@ -120,24 +121,22 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-3">
             <BookOpen className="w-8 h-8 text-primary-500" />
-            <h1 className="text-3xl font-bold">Manga</h1>
+            <h1 className="lg:text-3xl text-2xl font-bold">Manga</h1>
             <span className="text-gray-400">({filteredManga.length} results)</span>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-colors ${
-                viewMode === 'grid' ? 'bg-primary-500 text-white' : 'text-gray-400 hover:text-white'
-              }`}
+              className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-primary-500 text-white' : 'text-gray-400 hover:text-white'
+                }`}
             >
               <Grid className="w-5 h-5" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-lg transition-colors ${
-                viewMode === 'list' ? 'bg-primary-500 text-white' : 'text-gray-400 hover:text-white'
-              }`}
+              className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-primary-500 text-white' : 'text-gray-400 hover:text-white'
+                }`}
             >
               <List className="w-5 h-5" />
             </button>
@@ -210,27 +209,26 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
                     className="h-80 bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
                     style={{ backgroundImage: `url(${manga.cover})` }}
                   />
-                  
+
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        manga.status === 'Ongoing' ? 'bg-green-500' : 'bg-gray-500'
-                      } text-white`}>
+                      <span className={`px-2 py-1 text-xs rounded-full ${manga.status === 'Ongoing' ? 'bg-green-500' : 'bg-gray-500'
+                        } text-white`}>
                         {manga.status}
                       </span>
-                      
+
                       <div className="flex items-center space-x-1">
                         <Star className="w-4 h-4 text-yellow-400 fill-current" />
                         <span className="text-sm text-gray-300">{manga.rating}</span>
                       </div>
                     </div>
-                    
+
                     <h3 className="font-semibold text-white mb-1 group-hover:text-primary-400 transition-colors line-clamp-2">
                       {manga.title}
                     </h3>
-                    
+
                     <p className="text-sm text-gray-400 mb-2">by {manga.author}</p>
-                    
+
                     <div className="flex flex-wrap gap-1 mb-3">
                       {manga.genres.slice(0, 2).map((genre) => (
                         <span key={genre} className="text-xs bg-dark-200 text-gray-300 px-2 py-1 rounded">
@@ -238,7 +236,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
                         </span>
                       ))}
                     </div>
-                    
+
                     <div className="flex items-center justify-between text-sm text-gray-400">
                       <span>Ch. {manga.chapters}</span>
                       <div className="flex items-center space-x-1">
@@ -264,7 +262,7 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
                     className="w-24 h-32 bg-cover bg-center rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform"
                     style={{ backgroundImage: `url(${manga.cover})` }}
                   />
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
                       <div>
@@ -273,20 +271,20 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
                         </h3>
                         <p className="text-gray-400 mb-2">by {manga.author}</p>
                       </div>
-                      
+
                       <div className="flex items-center space-x-4 text-sm">
                         <div className="flex items-center space-x-1">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
                           <span className="text-white">{manga.rating}</span>
                         </div>
-                        
+
                         <div className="flex items-center space-x-1">
                           <Eye className="w-4 h-4 text-gray-400" />
                           <span className="text-gray-400">{manga.views}</span>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-3">
                       {manga.genres.map((genre) => (
                         <span key={genre} className="text-xs bg-dark-200 text-gray-300 px-2 py-1 rounded">
@@ -294,24 +292,23 @@ const MangaPage: React.FC<MangaPageProps> = ({ onNavigate, onSelectItem }) => {
                         </span>
                       ))}
                     </div>
-                    
+
                     <p className="text-gray-300 mb-3 line-clamp-2">
                       {manga.description}
                     </p>
-                    
+
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center space-x-4">
-                        <span className={`px-2 py-1 rounded-full ${
-                          manga.status === 'Ongoing' ? 'bg-green-500' : 'bg-gray-500'
-                        } text-white`}>
+                        <span className={`px-2 py-1 rounded-full ${manga.status === 'Ongoing' ? 'bg-green-500' : 'bg-gray-500'
+                          } text-white`}>
                           {manga.status}
                         </span>
-                        
+
                         <span className="text-gray-400">
                           Chapter {manga.chapters}
                         </span>
                       </div>
-                      
+
                       <div className="flex items-center space-x-1 text-gray-400">
                         <Calendar className="w-4 h-4" />
                         <span>{manga.lastUpdate}</span>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Search, Filter, Grid, List, Star, Eye, Calendar, Play } from 'lucide-react';
+import { Search, Grid, List, Star, Eye, Calendar, Play } from 'lucide-react';
+import type { Anime } from '../types';
 
 interface AnimePageProps {
   onNavigate: (page: string) => void;
-  onSelectItem: (item: any) => void;
+  onSelectItem: (item: Anime) => void;
 }
 
 const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
@@ -22,7 +23,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 1,
       title: "Demon Slayer Season 4",
-      thumbnail: "https://images.pexels.com/photos/8111116/pexels-photo-8111116.jpeg",
+      thumbnail: "/images/demon-slayer.jpg",
       studio: "Ufotable",
       genres: ["Action", "Historical"],
       status: "Ongoing",
@@ -37,7 +38,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 2,
       title: "Frieren: Beyond Journey's End",
-      thumbnail: "https://images.pexels.com/photos/8111089/pexels-photo-8111089.jpeg",
+      thumbnail: "/images/frieren.jpg",
       studio: "Madhouse",
       genres: ["Fantasy", "Drama"],
       status: "Ongoing",
@@ -52,7 +53,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 3,
       title: "Solo Leveling",
-      thumbnail: "https://images.pexels.com/photos/8721318/pexels-photo-8721318.jpeg",
+      thumbnail: "/images/solo-leveling.png",
       studio: "A-1 Pictures",
       genres: ["Action", "Fantasy"],
       status: "Completed",
@@ -67,7 +68,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 4,
       title: "Wind Breaker",
-      thumbnail: "https://images.pexels.com/photos/8111045/pexels-photo-8111045.jpeg",
+      thumbnail: "/images/wind-breaker.jpg",
       studio: "CloverWorks",
       genres: ["Action", "School"],
       status: "Ongoing",
@@ -82,7 +83,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 5,
       title: "Attack on Titan: Final Season",
-      thumbnail: "https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg",
+      thumbnail: "/images/attack-on-titan-final-season-final-episode.jpg",
       studio: "WIT Studio / MAPPA",
       genres: ["Action", "Drama"],
       status: "Completed",
@@ -97,7 +98,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 6,
       title: "Jujutsu Kaisen Season 2",
-      thumbnail: "https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg",
+      thumbnail: "/images/jujutsu-kaisen.jpg",
       studio: "MAPPA",
       genres: ["Action", "Supernatural"],
       status: "Completed",
@@ -120,7 +121,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
     return matchesSearch && matchesGenre && matchesStatus;
   });
 
-  const handleAnimeClick = (anime: any) => {
+  const handleAnimeClick = (anime: Anime) => {
     onSelectItem(anime);
     onNavigate('anime-detail');
   };
@@ -132,7 +133,7 @@ const AnimePage: React.FC<AnimePageProps> = ({ onNavigate, onSelectItem }) => {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-3">
             <Play className="w-8 h-8 text-primary-500" />
-            <h1 className="text-3xl font-bold">Anime</h1>
+            <h1 className="lg:text-3xl text-2xl font-bold">Anime</h1>
             <span className="text-gray-400">({filteredAnime.length} results)</span>
           </div>
           

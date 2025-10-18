@@ -1,16 +1,17 @@
 import React from 'react';
-import { BookOpen, Play, Star, Eye, Calendar, TrendingUp } from 'lucide-react';
+import { BookOpen, Play, Star, Eye, TrendingUp } from 'lucide-react';
+import type { Manga, Anime } from '../types';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
-  onSelectItem: (item: any) => void;
+  onSelectItem: (item: Manga | Anime) => void;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
   const featuredContent = {
     title: "Attack on Titan: Final Season",
     description: "The final battle for humanity's survival reaches its climax. Follow Eren Yeager and the Survey Corps as they face the ultimate truth about their world.",
-    image: "https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg",
+    image: "/images/attack-on-titan-final-season-final-episode.jpg",
     type: "anime",
     rating: 9.2,
     episodes: 16
@@ -20,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 1,
       title: "Jujutsu Kaisen",
-      cover: "https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg",
+      cover: "/images/jujutsu-kaisen.jpg",
       genres: ["Action", "Supernatural"],
       status: "Ongoing",
       chapter: "Chapter 245",
@@ -30,7 +31,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 2,
       title: "Chainsaw Man",
-      cover: "https://images.pexels.com/photos/7034784/pexels-photo-7034784.jpeg",
+      cover: "/images/chainsaw-man.jpg",
       genres: ["Action", "Horror"],
       status: "Ongoing",
       chapter: "Chapter 152",
@@ -40,7 +41,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 3,
       title: "My Hero Academia",
-      cover: "https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg",
+      cover: "/images/my-hero-academia.jpg",
       genres: ["Action", "School"],
       status: "Ongoing",
       chapter: "Chapter 408",
@@ -50,7 +51,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 4,
       title: "One Piece",
-      cover: "https://images.pexels.com/photos/8111318/pexels-photo-8111318.jpeg",
+      cover: "/images/one-piece.jpg",
       genres: ["Adventure", "Comedy"],
       status: "Ongoing",
       chapter: "Chapter 1103",
@@ -63,7 +64,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 1,
       title: "Demon Slayer Season 4",
-      thumbnail: "https://images.pexels.com/photos/8111116/pexels-photo-8111116.jpeg",
+      thumbnail: "/images/demon-slayer.jpg",
       genres: ["Action", "Historical"],
       episode: "Episode 8",
       rating: 9.0,
@@ -72,7 +73,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 2,
       title: "Frieren: Beyond Journey's End",
-      thumbnail: "https://images.pexels.com/photos/8111089/pexels-photo-8111089.jpeg",
+      thumbnail: "/images/frieren.jpg",
       genres: ["Fantasy", "Drama"],
       episode: "Episode 16",
       rating: 9.4,
@@ -81,7 +82,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 3,
       title: "Solo Leveling",
-      thumbnail: "https://images.pexels.com/photos/8721318/pexels-photo-8721318.jpeg",
+      thumbnail: "/images/solo-leveling.png",
       genres: ["Action", "Fantasy"],
       episode: "Episode 12",
       rating: 8.8,
@@ -90,7 +91,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     {
       id: 4,
       title: "Wind Breaker",
-      thumbnail: "https://images.pexels.com/photos/8111045/pexels-photo-8111045.jpeg",
+      thumbnail: "/images/wind-breaker.jpg",
       genres: ["Action", "School"],
       episode: "Episode 10",
       rating: 8.6,
@@ -98,7 +99,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
     }
   ];
 
-  const handleItemClick = (item: any, type: string) => {
+  const handleItemClick = (item: Manga | Anime, type: string) => {
     onSelectItem({ ...item, type });
     onNavigate(type === 'manga' ? 'manga-detail' : 'anime-detail');
   };
@@ -167,12 +168,12 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, onSelectItem }) => {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
               <TrendingUp className="w-6 h-6 text-primary-500" />
-              <h2 className="text-3xl font-bold">Manga Terbaru</h2>
+              <h2 className="lg:text-3xl text-xl font-bold">Manga Terbaru</h2>
             </div>
             
             <button
               onClick={() => onNavigate('manga')}
-              className="text-primary-400 hover:text-primary-300 font-semibold transition-colors"
+              className="text-primary-400 lg:text-lg text-sm hover:text-primary-300 font-semibold transition-colors"
             >
               Lihat Semua →
             </button>
